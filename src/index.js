@@ -1,15 +1,17 @@
 /**
- * Cloudflare Pages Function — POST /api/contact
- * Handles investor-deck requests from the contact form.
+ * Aevrium Biosystems — Cloudflare Worker (static assets + form API).
  *
- * Optional environment variables (set in the Cloudflare dashboard or wrangler):
+ * Serves the static site in /public via the ASSETS binding and handles
+ * POST /api/contact for investor-deck requests.
+ *
+ * Optional environment variables (Worker dashboard → Settings → Variables):
  *   RESEND_API_KEY  — if set, sends a notification email via Resend
  *   NOTIFY_TO       — destination address (default: contact@aevrium.com)
  *   NOTIFY_FROM     — verified sender (default: noreply@aevrium.com)
  *   LEADS           — (optional) KV namespace binding to persist leads
  *
- * With no env configured, the function still validates and returns 200,
- * so the form works on a fresh deploy. Wire RESEND_API_KEY to receive email.
+ * With no env configured, the API still validates and returns 200, so the
+ * form works on a fresh deploy. Wire RESEND_API_KEY to receive email.
  */
 
 const JSON_HEADERS = { "Content-Type": "application/json; charset=utf-8" };
@@ -23,7 +25,7 @@ function clean(v, max = 2000) {
   return String(v == null ? "" : v).trim().slice(0, max);
 }
 
-export async function onRequestPost({ request, env }) {
+async function handleContact(request, env) {
   let data;
   try {
     data = await request.json();
@@ -57,7 +59,7 @@ export async function onRequestPost({ request, env }) {
   if (env.LEADS && typeof env.LEADS.put === "function") {
     try {
       await env.LEADS.put(`lead:${lead.receivedAt}:${email}`, JSON.stringify(lead));
-    } catch (e) {
+    } catch {
       // non-fatal
     }
   }
@@ -93,12 +95,26 @@ export async function onRequestPost({ request, env }) {
         const detail = await r.text();
         return json({ ok: false, error: "Email provider error.", detail }, 502);
       }
-    } catch (e) {
+    } catch {
       return json({ ok: false, error: "Failed to send notification." }, 502);
     }
   }
 
   return json({ ok: true });
 }
-// Note: any non-POST method to /api/contact is answered with an automatic
-// 405 Method Not Allowed by Pages, because only onRequestPost is defined.
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/api/contact") {
+      if (request.method !== "POST") {
+        return new Response("Method Not Allowed", { status: 405, headers: { Allow: "POST" } });
+      }
+      return handleContact(request, env);
+    }
+
+    // Everything else is a static asset (index.html, css, js, 404, etc.).
+    return env.ASSETS.fetch(request);
+  },
+};

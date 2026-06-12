@@ -1,6 +1,6 @@
 # Aevrium Biosystems — Investor Website
 
-A world-class, accessible investor site for **Aevrium Biosystems** (Aevrium Select — a consumables-led reproductive microfluidics wedge for IVF labs). Built as a zero-build static site plus a Cloudflare Pages Function for the investor-deck form. Deploys to **Cloudflare Pages** straight from GitHub.
+A world-class, accessible investor site for **Aevrium Biosystems** (Aevrium Select — a consumables-led reproductive microfluidics wedge for IVF labs). Built as a static site served by a **Cloudflare Worker** (Workers Static Assets) with a small Worker API for the investor-deck form. Deploys straight from GitHub via **Workers Builds**.
 
 **Design system:** *Clinical Precision* — deep-ink dark surfaces, a serif/grotesque/mono type system, and three semantic accents (cyan = signal, mint = viability, gold = Fareban provenance).
 
@@ -10,7 +10,7 @@ A world-class, accessible investor site for **Aevrium Biosystems** (Aevrium Sele
 
 ```
 .
-├── public/                     # ← Cloudflare Pages build output dir
+├── public/                     # Static assets (served by the Worker)
 │   ├── index.html              # Main investor site
 │   ├── 404.html                # Custom not-found page
 │   ├── robots.txt
@@ -21,9 +21,9 @@ A world-class, accessible investor site for **Aevrium Biosystems** (Aevrium Sele
 │       ├── css/styles.css      # Design system
 │       ├── js/main.js          # Scrollspy, reveal, counters, form
 │       └── img/                # favicon.svg, og.svg
-├── functions/
-│   └── api/contact.js          # POST /api/contact (Pages Function)
-├── wrangler.toml
+├── src/
+│   └── index.js                # Worker: serves assets + POST /api/contact
+├── wrangler.toml               # name, main, [assets] binding
 ├── package.json
 └── README.md
 ```
@@ -34,14 +34,14 @@ A world-class, accessible investor site for **Aevrium Biosystems** (Aevrium Sele
 
 Prerequisites: **Node 18+**.
 
-**Full preview (recommended — runs the `/api/contact` Function):**
+**Full preview (recommended — runs the Worker + `/api/contact`):**
 
 ```bash
 npm install
 npm run dev          # → http://localhost:8788
 ```
 
-**Static-only preview (no Function; the form falls back to a mailto link):**
+**Static-only preview (no Worker; the form falls back to a mailto link):**
 
 ```bash
 npm run static       # → http://localhost:5050
@@ -51,44 +51,48 @@ python -m http.server 5050 --directory public
 
 ---
 
-## Deploy to Cloudflare Pages (via GitHub)
+## Deploy to Cloudflare (Workers Builds, via GitHub)
 
-1. **Push to GitHub**
+> Cloudflare has merged Pages into Workers. New Git-connected projects are
+> created from the **Workers** side as **Workers Builds** — that's what this
+> repo targets (a Worker that serves static assets + the form API).
+
+1. **Push to GitHub** (already a repo? skip to step 2):
    ```bash
-   git init
-   git add .
-   git commit -m "Aevrium Biosystems investor site"
-   git branch -M main
    git remote add origin https://github.com/<you>/aevrium-biosystems.git
    git push -u origin main
    ```
 
-2. **Create the Pages project**
-   - Cloudflare Dashboard → **Workers & Pages → Create → Pages → Connect to Git**
-   - Select the repo.
-   - Build settings:
-     - **Framework preset:** `None`
+2. **Create the Worker from the repo**
+   - Cloudflare Dashboard → **Workers & Pages → Create → Workers → Import a repository**
+     (or **Connect to Git**).
+   - Select the repo. Cloudflare reads `wrangler.toml`, so:
      - **Build command:** *(leave empty)*
-     - **Build output directory:** `public`
-   - Deploy. Functions in `functions/` are detected automatically.
+     - **Deploy command:** `npx wrangler deploy` (the default)
+   - **Create and deploy.** The `[assets]` block serves `public/`; `src/index.js`
+     handles `POST /api/contact`.
+
+   _CLI alternative:_ `npx wrangler login` then `npm run deploy`.
 
 3. **(Optional) Wire up the form email**
    - Get a [Resend](https://resend.com) API key and verify your sending domain.
-   - Pages project → **Settings → Environment variables**:
-     - `RESEND_API_KEY` = your key (encrypt as a Secret)
+   - Worker → **Settings → Variables & Secrets**:
+     - `RESEND_API_KEY` = your key (add as a **Secret**)
      - `NOTIFY_TO` = `contact@aevrium.com`
      - `NOTIFY_FROM` = `Aevrium Website <noreply@aevrium.com>`
-   - Redeploy. Without a key, the form still validates and returns success; the client also falls back to `mailto:` if the API is unreachable.
+   - Redeploy. Without a key the form still validates and returns success; the
+     client also falls back to `mailto:` if the API is unreachable.
 
 4. **(Optional) Persist leads to KV**
    ```bash
    npx wrangler kv namespace create LEADS
    ```
-   Add the binding `LEADS` in **Settings → Functions → KV namespace bindings** (and uncomment the block in `wrangler.toml` for local dev).
+   Add the printed `id` to `wrangler.toml` under a `[[kv_namespaces]]` block
+   with `binding = "LEADS"`, commit, and redeploy.
 
-5. **Custom domain:** Pages project → **Custom domains → Set up** → `aevrium.com`. Update the absolute URLs in `index.html` (canonical/OG), `robots.txt`, and `sitemap.xml` if the domain differs.
-
-> CLI alternative to the dashboard: `npm run deploy` (after `npx wrangler login`).
+5. **Custom domain:** Worker → **Settings → Domains & Routes → Add** → `aevrium.com`.
+   Update the absolute URLs in `index.html` (canonical/OG), `robots.txt`, and
+   `sitemap.xml` if the domain differs.
 
 ---
 

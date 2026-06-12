@@ -1,22 +1,23 @@
 name = "aevrium-biosystems"
+main = "src/index.js"
 compatibility_date = "2024-11-01"
-pages_build_output_dir = "public"
 
-# ── Optional bindings ───────────────────────────────────────────────
-# Email notifications for the investor-deck form are sent via Resend
-# when RESEND_API_KEY is set. Configure secrets in the Cloudflare
-# dashboard (Settings → Environment variables) or with:
-#   npx wrangler pages secret put RESEND_API_KEY
-#
+# Serve the static site from /public and expose it to the Worker as `ASSETS`.
+# Static assets are served first; the Worker only runs for non-asset paths
+# (e.g. POST /api/contact). A missing path renders public/404.html.
+[assets]
+directory = "./public"
+binding = "ASSETS"
+not_found_handling = "404-page"
+
+# Non-secret defaults. Set RESEND_API_KEY as an encrypted secret:
+#   npx wrangler secret put RESEND_API_KEY
 # To persist leads, create a KV namespace and bind it as LEADS:
 #   npx wrangler kv namespace create LEADS
-# then add the binding below (and in the dashboard for production):
-#
-# [[kv_namespaces]]
-# binding = "LEADS"
-# id = "<your-kv-namespace-id>"
-#
-# Non-secret defaults:
+# then add:
+#   [[kv_namespaces]]
+#   binding = "LEADS"
+#   id = "<your-kv-namespace-id>"
 [vars]
 NOTIFY_TO = "contact@aevrium.com"
 NOTIFY_FROM = "Aevrium Website <noreply@aevrium.com>"
