@@ -1,0 +1,22 @@
+name = "aevrium-biosystems"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "public"
+
+# ── Optional bindings ───────────────────────────────────────────────
+# Email notifications for the investor-deck form are sent via Resend
+# when RESEND_API_KEY is set. Configure secrets in the Cloudflare
+# dashboard (Settings → Environment variables) or with:
+#   npx wrangler pages secret put RESEND_API_KEY
+#
+# To persist leads, create a KV namespace and bind it as LEADS:
+#   npx wrangler kv namespace create LEADS
+# then add the binding below (and in the dashboard for production):
+#
+# [[kv_namespaces]]
+# binding = "LEADS"
+# id = "<your-kv-namespace-id>"
+#
+# Non-secret defaults:
+[vars]
+NOTIFY_TO = "contact@aevrium.com"
+NOTIFY_FROM = "Aevrium Website <noreply@aevrium.com>"

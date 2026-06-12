@@ -1,0 +1,16 @@
+{
+  "name": "aevrium-biosystems",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aevrium Biosystems — investor website (Cloudflare Pages, static + Functions).",
+  "scripts": {
+    "dev": "wrangler pages dev public --port 8788",
+    "serve": "wrangler pages dev public --port 8788",
+    "preview": "wrangler pages dev public --port 8788",
+    "deploy": "wrangler pages deploy public",
+    "static": "npx --yes serve public -l 5050"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  }
+}

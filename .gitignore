@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Wrangler / Cloudflare
+.wrangler/
+.dev.vars
+.dev.vars.*
+
+# Env & secrets
+.env
+.env.*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Build artifacts
+dist/
+.cache/
+
+# Design scratch (not part of the deployed site)
+design-direction.html
+aevrium_biosystems_investor_website_final.html
+
+# Test artifacts
+shot-*.png
+.shot*.mjs

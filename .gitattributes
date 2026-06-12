@@ -1,0 +1,4 @@
+# Normalize line endings — repo is authoritative as LF.
+* text=auto eol=lf
+*.png binary
+*.svg text eol=lf

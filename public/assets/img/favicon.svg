@@ -1,0 +1,6 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aevrium Biosystems">
+  <rect width="64" height="64" rx="14" fill="#07111f"/>
+  <path d="M32 8.5C42.6 8.5 51.2 17.1 51.2 27.7C51.2 42.4 32 56.5 32 56.5C32 56.5 12.8 42.4 12.8 27.7C12.8 17.1 21.4 8.5 32 8.5Z" stroke="#66c8ff" stroke-width="3.6" fill="none"/>
+  <path d="M23 30.6C27.8 20.2 37.4 20.1 41.3 25.9C45.8 32.5 37.8 41.8 26.4 41.8" stroke="#94e2b2" stroke-width="3.6" stroke-linecap="round" fill="none"/>
+  <circle cx="31.8" cy="31.8" r="4.2" fill="#d8b36a"/>
+</svg>

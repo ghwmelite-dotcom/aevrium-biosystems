@@ -1,0 +1,12 @@
+{
+  "name": "Aevrium Biosystems",
+  "short_name": "Aevrium",
+  "description": "Aevrium Select — a consumables-led reproductive microfluidics wedge for IVF labs.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "icons": [
+    { "src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
