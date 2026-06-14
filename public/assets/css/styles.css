@@ -310,8 +310,8 @@ textarea:focus-visible, .btn:focus-visible {
 
 /* ---------- Footer ---------- */
 footer { padding:38px 0 64px; border-top:1px solid rgba(255,255,255,.07); margin-top:28px; }
-.footer-logo { margin:0 auto 30px; max-width:440px; text-align:center; }
-.footer-logo img { width:100%; height:auto; opacity:.92; filter:drop-shadow(0 8px 26px rgba(77,151,230,.28)); }
+.footer-logo { margin:0 auto 22px; max-width:248px; text-align:center; }
+.footer-logo img { width:100%; height:auto; opacity:.88; filter:drop-shadow(0 6px 20px rgba(77,151,230,.22)); }
 .footer-row { display:flex; flex-wrap:wrap; justify-content:space-between; gap:18px; align-items:center; color:var(--muted); font-size:.9rem; }
 .footer-row a { color:var(--text); font-weight:600; }
 .footer-row a:hover, .footer-row a:focus-visible { text-decoration:underline; text-underline-offset:4px; }
