@@ -1,6 +1,28 @@
 <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aevrium Biosystems">
+  <defs>
+    <linearGradient id="favRib" x1="8" y1="44" x2="56" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6cc6f4"/>
+      <stop offset=".5" stop-color="#2f74d4"/>
+      <stop offset="1" stop-color="#0e2c6e"/>
+    </linearGradient>
+    <radialGradient id="favSph" cx=".34" cy=".30" r=".9">
+      <stop offset="0" stop-color="#cdeafd"/>
+      <stop offset=".4" stop-color="#4d97e6"/>
+      <stop offset="1" stop-color="#0c2766"/>
+    </radialGradient>
+  </defs>
   <rect width="64" height="64" rx="14" fill="#07111f"/>
-  <path d="M32 8.5C42.6 8.5 51.2 17.1 51.2 27.7C51.2 42.4 32 56.5 32 56.5C32 56.5 12.8 42.4 12.8 27.7C12.8 17.1 21.4 8.5 32 8.5Z" stroke="#66c8ff" stroke-width="3.6" fill="none"/>
-  <path d="M23 30.6C27.8 20.2 37.4 20.1 41.3 25.9C45.8 32.5 37.8 41.8 26.4 41.8" stroke="#94e2b2" stroke-width="3.6" stroke-linecap="round" fill="none"/>
-  <circle cx="31.8" cy="31.8" r="4.2" fill="#d8b36a"/>
+  <g transform="translate(7 9) scale(.78)">
+    <g fill="none" stroke="url(#favRib)" stroke-linecap="round">
+      <path d="M9 31C21 14 44 14 56 30" stroke-width="5"/>
+      <path d="M9 33C21 50 44 50 56 34" stroke-width="5"/>
+      <path d="M6 36C24 30 41 31 58 24" stroke-width="3"/>
+    </g>
+    <circle cx="54.5" cy="32" r="6" fill="url(#favSph)"/>
+    <circle cx="16.5" cy="22" r="4.2" fill="url(#favSph)"/>
+    <circle cx="28" cy="43" r="3.1" fill="url(#favSph)"/>
+    <circle cx="20.5" cy="40" r="1.9" fill="#cdeafd" opacity=".9"/>
+    <ellipse cx="52.6" cy="29.6" rx="1.7" ry="1.1" fill="#fff" opacity=".75"/>
+    <ellipse cx="15.1" cy="20.4" rx="1.2" ry=".8" fill="#fff" opacity=".7"/>
+  </g>
 </svg>

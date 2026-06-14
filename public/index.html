@@ -57,9 +57,29 @@
       <a class="brand" href="#top" aria-label="Aevrium Biosystems home">
         <span class="brand-mark" aria-hidden="true">
           <svg viewBox="0 0 64 64" fill="none" role="img">
-            <path d="M32 5.5C43.4 5.5 52.7 14.8 52.7 26.2C52.7 42.1 32 58.5 32 58.5C32 58.5 11.3 42.1 11.3 26.2C11.3 14.8 20.6 5.5 32 5.5Z" stroke="#66c8ff" stroke-width="4" />
-            <path d="M22 29.3C27.2 18 37.7 17.9 42 24.2C46.9 31.4 38.2 41.5 25.7 41.5" stroke="#94e2b2" stroke-width="4" stroke-linecap="round" />
-            <circle cx="31.8" cy="31.8" r="4.5" fill="#d8b36a" />
+            <defs>
+              <linearGradient id="aevRib" x1="8" y1="44" x2="56" y2="20" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#6cc6f4" />
+                <stop offset=".5" stop-color="#2f74d4" />
+                <stop offset="1" stop-color="#0e2c6e" />
+              </linearGradient>
+              <radialGradient id="aevSph" cx=".34" cy=".30" r=".9">
+                <stop offset="0" stop-color="#cdeafd" />
+                <stop offset=".4" stop-color="#4d97e6" />
+                <stop offset="1" stop-color="#0c2766" />
+              </radialGradient>
+            </defs>
+            <g fill="none" stroke="url(#aevRib)" stroke-linecap="round">
+              <path d="M9 31C21 14 44 14 56 30" stroke-width="5" />
+              <path d="M9 33C21 50 44 50 56 34" stroke-width="5" />
+              <path d="M6 36C24 30 41 31 58 24" stroke-width="3" />
+            </g>
+            <circle cx="54.5" cy="32" r="6" fill="url(#aevSph)" />
+            <circle cx="16.5" cy="22" r="4.2" fill="url(#aevSph)" />
+            <circle cx="28" cy="43" r="3.1" fill="url(#aevSph)" />
+            <circle cx="20.5" cy="40" r="1.9" fill="#cdeafd" opacity=".9" />
+            <ellipse cx="52.6" cy="29.6" rx="1.7" ry="1.1" fill="#fff" opacity=".75" />
+            <ellipse cx="15.1" cy="20.4" rx="1.2" ry=".8" fill="#fff" opacity=".7" />
           </svg>
         </span>
         <span class="brand-wordmark">
@@ -107,6 +127,9 @@
         </div>
 
         <aside class="panel hero-side reveal" data-delay="1" aria-label="Investor thesis highlights">
+          <figure class="hero-logo">
+            <img src="/assets/img/logo-full.png" width="1507" height="601" alt="Aevrium Biosystems" loading="eager" decoding="async" />
+          </figure>
           <svg class="motif" viewBox="0 0 360 150" fill="none" role="img" aria-label="Aevrium Select cartridge flow: sample enters, is selected, scored, and output with a confidence signal.">
             <path d="M20 40 H150" stroke="rgba(255,255,255,.16)" stroke-width="2"/>
             <path d="M20 75 H150" stroke="rgba(255,255,255,.16)" stroke-width="2"/>
@@ -367,6 +390,9 @@
 
   <footer>
     <div class="container">
+      <figure class="footer-logo">
+        <img src="/assets/img/logo-full.png" width="1507" height="601" alt="Aevrium Biosystems" loading="lazy" decoding="async" />
+      </figure>
       <div class="footer-row">
         <span>&copy; <span id="year">2026</span> Aevrium Biosystems. All rights reserved.</span>
         <span><a href="#top" data-scroll>Back to top</a> &middot; <a href="mailto:contact@aevrium.com">Contact</a></span>
