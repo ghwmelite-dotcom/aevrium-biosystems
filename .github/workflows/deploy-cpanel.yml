@@ -29,10 +29,10 @@ jobs:
           protocol: ftps
           port: 21
           local-dir: ./public/
-          # Deploys to the preview.aevrium.com subdomain by default. To cut
+          # Deploys to the investor.aevrium.com subdomain by default. To cut
           # over to the live apex later, change this to '/public_html/' (or
           # set an FTP_REMOTE_DIR secret to override without editing).
-          server-dir: ${{ secrets.FTP_REMOTE_DIR || '/preview.aevrium.com/' }}
+          server-dir: ${{ secrets.FTP_REMOTE_DIR || '/investor.aevrium.com/' }}
           state-name: .ftp-deploy-sync-state.json
           # _headers is Cloudflare-only; config.php is uploaded once by hand
           # and must never be clobbered by the deploy.

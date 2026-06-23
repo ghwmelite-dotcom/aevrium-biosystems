@@ -1,8 +1,11 @@
 # Deploying to Namecheap cPanel
 
-The site auto-deploys to cPanel (`public_html`) over FTPS on every push to
-`main`, via `.github/workflows/deploy-cpanel.yml`. The static files in
-`/public` are synced as-is; the contact form runs as PHP (`public/api/contact.php`).
+The site auto-deploys to the **`investor.aevrium.com`** subdomain docroot on
+cPanel over FTPS on every push to `main`, via
+`.github/workflows/deploy-cpanel.yml`. The static files in `/public` are synced
+as-is; the contact form runs as PHP (`public/api/contact.php`). The target is
+set by `server-dir` in the workflow (defaults to `/investor.aevrium.com/`); set
+an `FTP_REMOTE_DIR` secret to override without editing.
 
 ## 1. One-time: add GitHub repository secrets
 
