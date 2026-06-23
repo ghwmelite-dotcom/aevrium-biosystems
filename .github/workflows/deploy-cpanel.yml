@@ -1,0 +1,43 @@
+name: Deploy to cPanel
+
+# Publishes the static site in /public to Namecheap cPanel (public_html)
+# over FTPS on every push to main. Configure the secrets listed in
+# docs/DEPLOY-CPANEL.md before the first run.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-cpanel
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync /public to cPanel via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./public/
+          # Deploys to the preview.aevrium.com subdomain by default. To cut
+          # over to the live apex later, change this to '/public_html/' (or
+          # set an FTP_REMOTE_DIR secret to override without editing).
+          server-dir: ${{ secrets.FTP_REMOTE_DIR || '/preview.aevrium.com/' }}
+          state-name: .ftp-deploy-sync-state.json
+          # _headers is Cloudflare-only; config.php is uploaded once by hand
+          # and must never be clobbered by the deploy.
+          exclude: |
+            **/_headers
+            **/config.php
+            **/.DS_Store
+            **/Thumbs.db
