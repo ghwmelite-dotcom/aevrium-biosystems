@@ -1,0 +1,29 @@
+name: Decommission preview.aevrium.com
+
+# One-shot, manual-only. Blanks the OLD preview.aevrium.com docroot now that
+# the site lives at investor.aevrium.com. Syncs an empty directory over the
+# remote dir with a clean slate, deleting every file (incl. the sync-state).
+# Run via: Actions -> Decommission preview.aevrium.com -> Run workflow.
+# Safe to delete this file after a successful run.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  wipe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make an empty source directory
+        run: mkdir -p empty
+
+      - name: Clean-slate the preview docroot via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./empty/
+          server-dir: /preview.aevrium.com/
+          dangerous-clean-slate: true
