@@ -1,32 +1,29 @@
-# Dependencies
+# Dependencies (local-only; the static site needs no build)
 node_modules/
 
-# Wrangler / Cloudflare
+# Wrangler local cache (legacy Cloudflare Worker tooling)
 .wrangler/
-.dev.vars
-.dev.vars.*
-
-# Env & secrets
-.env
-.env.*
-public/api/config.php
 
 # cPanel FTP deploy state (created on the server)
 .ftp-deploy-sync-state.json
+.ftp-deploy-apex-state.json
+
+# Local working source for the sibling sites (each has its own repo)
+/aevrium bios project/
+/fareban holdings project/
+/kura project/
+/nevulium project/
+
+# Local design scratch (not part of the deployed site)
+design-direction.html
+aevrium_biosystems_investor_website_final.html
 
 # OS / editor
 .DS_Store
 Thumbs.db
 *.log
 
-# Build artifacts
-dist/
-.cache/
-
-# Design scratch (not part of the deployed site)
-design-direction.html
-aevrium_biosystems_investor_website_final.html
-
-# Test artifacts
+# Local scratch — temp render/build scripts and screenshots
+_*.mjs
+_*.png
 shot-*.png
-.shot*.mjs
