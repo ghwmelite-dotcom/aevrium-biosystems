@@ -1,11 +1,19 @@
 # Deploying to Namecheap cPanel
 
-The site auto-deploys to the **`investor.aevrium.com`** subdomain docroot on
-cPanel over FTPS on every push to `main`, via
-`.github/workflows/deploy-cpanel.yml`. The static files in `/public` are synced
-as-is; the contact form runs as PHP (`public/api/contact.php`). The target is
-set by `server-dir` in the workflow (defaults to `/investor.aevrium.com/`); set
-an `FTP_REMOTE_DIR` secret to override without editing.
+Two static sites auto-deploy to cPanel over FTPS on every push to `main`, via
+`.github/workflows/deploy-cpanel.yml` (two jobs sharing the same `FTP_*`
+secrets):
+
+| Source folder | cPanel target           | Live URL                   | Site                                   |
+| ------------- | ----------------------- | -------------------------- | -------------------------------------- |
+| `/public`     | `/investor.aevrium.com/`| `investor.aevrium.com`     | Aevrium **Biosystems** investor site   |
+| `/apex`       | `/public_html/`         | `aevrium.com` / `www`      | Aevrium **Biosciences** single-page site |
+
+The investor target is overridable via an optional `FTP_REMOTE_DIR` secret. The
+`/public` files sync as-is and the contact form runs as PHP
+(`public/api/contact.php`); `/apex` is a single self-contained `index.html`. The
+apex job is **not** clean-slate, so server-side files like `.well-known`
+(AutoSSL) and `cgi-bin` are left untouched.
 
 ## 1. One-time: add GitHub repository secrets
 
