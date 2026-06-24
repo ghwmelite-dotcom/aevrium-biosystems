@@ -1,8 +1,9 @@
 name: Deploy to cPanel
 
-# Publishes the static site in /public to Namecheap cPanel (public_html)
-# over FTPS on every push to main. Configure the secrets listed in
-# docs/DEPLOY-CPANEL.md before the first run.
+# Two static sites auto-publish to Namecheap cPanel over FTPS on every push
+# to main, using the same FTP_* secrets (see docs/DEPLOY-CPANEL.md):
+#   - /public  -> investor.aevrium.com  (Aevrium Biosystems investor site)
+#   - /apex    -> public_html           (aevrium.com — Aevrium Biosciences site)
 
 on:
   push:
@@ -38,6 +39,31 @@ jobs:
           # and must never be clobbered by the deploy.
           exclude: |
             **/_headers
+            **/config.php
+            **/.DS_Store
+            **/Thumbs.db
+
+  deploy-apex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync /apex to aevrium.com (public_html) via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./apex/
+          server-dir: /public_html/
+          # Separate state file so this target never collides with the
+          # investor sync. NOT clean-slate: leaves .well-known (AutoSSL),
+          # cgi-bin, and any hand-placed server files untouched.
+          state-name: .ftp-deploy-apex-state.json
+          exclude: |
             **/config.php
             **/.DS_Store
             **/Thumbs.db
