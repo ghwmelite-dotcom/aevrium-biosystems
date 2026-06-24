@@ -1,9 +1,8 @@
 name: Deploy to cPanel
 
-# Two static sites auto-publish to Namecheap cPanel over FTPS on every push
-# to main, using the same FTP_* secrets (see docs/DEPLOY-CPANEL.md):
-#   - /public  -> investor.aevrium.com  (Aevrium Biosystems investor site)
-#   - /apex    -> public_html           (aevrium.com — Aevrium Biosciences site)
+# Publishes the aevrium.com site (/apex -> public_html) to Namecheap cPanel
+# over FTPS on every push to main. The former investor.aevrium.com target
+# (/public) was decommissioned.
 
 on:
   push:
@@ -15,34 +14,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Sync /public to cPanel via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          local-dir: ./public/
-          # Deploys to the investor.aevrium.com subdomain by default. To cut
-          # over to the live apex later, change this to '/public_html/' (or
-          # set an FTP_REMOTE_DIR secret to override without editing).
-          server-dir: ${{ secrets.FTP_REMOTE_DIR || '/investor.aevrium.com/' }}
-          state-name: .ftp-deploy-sync-state.json
-          # _headers is Cloudflare-only; config.php is uploaded once by hand
-          # and must never be clobbered by the deploy.
-          exclude: |
-            **/_headers
-            **/config.php
-            **/.DS_Store
-            **/Thumbs.db
-
   deploy-apex:
     runs-on: ubuntu-latest
     steps:
@@ -59,9 +30,8 @@ jobs:
           port: 21
           local-dir: ./apex/
           server-dir: /public_html/
-          # Separate state file so this target never collides with the
-          # investor sync. NOT clean-slate: leaves .well-known (AutoSSL),
-          # cgi-bin, and any hand-placed server files untouched.
+          # NOT clean-slate: leaves .well-known (AutoSSL), cgi-bin, and any
+          # hand-placed server files untouched.
           state-name: .ftp-deploy-apex-state.json
           exclude: |
             **/config.php

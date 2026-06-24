@@ -1,19 +1,20 @@
 # Deploying to Namecheap cPanel
 
-Two static sites auto-deploy to cPanel over FTPS on every push to `main`, via
-`.github/workflows/deploy-cpanel.yml` (two jobs sharing the same `FTP_*`
-secrets):
+The aevrium.com site auto-deploys to cPanel over FTPS on every push to `main`,
+via `.github/workflows/deploy-cpanel.yml`:
 
-| Source folder | cPanel target           | Live URL                   | Site                                   |
-| ------------- | ----------------------- | -------------------------- | -------------------------------------- |
-| `/public`     | `/investor.aevrium.com/`| `investor.aevrium.com`     | Aevrium **Biosystems** investor site   |
-| `/apex`       | `/public_html/`         | `aevrium.com` / `www`      | Aevrium **Biosciences** single-page site |
+| Source folder | cPanel target   | Live URL              | Site                              |
+| ------------- | --------------- | --------------------- | --------------------------------- |
+| `/apex`       | `/public_html/` | `aevrium.com` / `www` | Aevrium Biosystems single-page site |
 
-The investor target is overridable via an optional `FTP_REMOTE_DIR` secret. The
-`/public` files sync as-is and the contact form runs as PHP
-(`public/api/contact.php`); `/apex` is a single self-contained `index.html`. The
-apex job is **not** clean-slate, so server-side files like `.well-known`
-(AutoSSL) and `cgi-bin` are left untouched.
+`/apex` is a single self-contained `index.html`. The job is **not** clean-slate,
+so server-side files like `.well-known` (AutoSSL) and `cgi-bin` are left
+untouched.
+
+> The former **investor.aevrium.com** target (`/public`) was decommissioned. Its
+> live content was wiped via the one-shot `decommission-investor.yml` workflow;
+> the `/public` source remains in the repo (dormant) and the subdomain itself is
+> removed in cPanel separately.
 
 ## 1. One-time: add GitHub repository secrets
 
