@@ -16,10 +16,6 @@ A world-class, accessible **investor website** for a patent-pending biotech rais
 ![Accessibility](https://img.shields.io/badge/A11y-WCAG_AA-94e2b2)
 ![License](https://img.shields.io/badge/License-proprietary-d8b36a)
 
-<br />
-
-<img src="docs/preview.png" width="860" alt="Aevrium Biosystems investor website — hero section" />
-
 </div>
 
 <br />
