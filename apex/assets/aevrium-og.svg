@@ -1,0 +1,84 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aevrium Biosystems — development-stage reproductive microfluidics">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="0.55" stop-color="#081525"/>
+      <stop offset="1" stop-color="#050c16"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.15" cy="0.05" r="0.5">
+      <stop offset="0" stop-color="#66c8ff" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#66c8ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.9" cy="0.0" r="0.45">
+      <stop offset="0" stop-color="#94e2b2" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#94e2b2" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ogRib" x1="8" y1="44" x2="56" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6cc6f4"/>
+      <stop offset="0.5" stop-color="#2f74d4"/>
+      <stop offset="1" stop-color="#0e2c6e"/>
+    </linearGradient>
+    <radialGradient id="ogSph" cx="0.34" cy="0.30" r="0.9">
+      <stop offset="0" stop-color="#cdeafd"/>
+      <stop offset="0.4" stop-color="#4d97e6"/>
+      <stop offset="1" stop-color="#0c2766"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+  <rect x="0.5" y="0.5" width="1199" height="629" fill="none" stroke="#4d97e6" stroke-opacity="0.10"/>
+
+  <!-- brand lockup -->
+  <g transform="translate(90,80)">
+    <rect width="86" height="86" rx="22" fill="#07111f" stroke="#4d97e6" stroke-opacity="0.40"/>
+    <g transform="translate(8,8) scale(1.09)">
+      <g fill="none" stroke="url(#ogRib)" stroke-linecap="round">
+        <path d="M9 31C21 14 44 14 56 30" stroke-width="5"/>
+        <path d="M9 33C21 50 44 50 56 34" stroke-width="5"/>
+        <path d="M6 36C24 30 41 31 58 24" stroke-width="3"/>
+      </g>
+      <circle cx="54.5" cy="32" r="6" fill="url(#ogSph)"/>
+      <circle cx="16.5" cy="22" r="4.2" fill="url(#ogSph)"/>
+      <circle cx="28" cy="43" r="3.1" fill="url(#ogSph)"/>
+      <circle cx="20.5" cy="40" r="1.9" fill="#cdeafd" opacity="0.9"/>
+      <ellipse cx="52.6" cy="29.6" rx="1.7" ry="1.1" fill="#ffffff" opacity="0.75"/>
+      <ellipse cx="15.1" cy="20.4" rx="1.2" ry="0.8" fill="#ffffff" opacity="0.7"/>
+    </g>
+  </g>
+  <text x="196" y="118" font-family="Inter, 'Segoe UI', sans-serif" font-size="26" font-weight="800" letter-spacing="3" fill="#eef4fb">AEVRIUM BIOSYSTEMS</text>
+  <text x="196" y="150" font-family="'JetBrains Mono', Consolas, monospace" font-size="16" letter-spacing="2" fill="#7f90a7">A FAREBAN OPERATING COMPANY</text>
+
+  <!-- eyebrow -->
+  <text x="92" y="266" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" font-weight="600" letter-spacing="3" fill="#66c8ff">DEVELOPMENT-STAGE COMPANY OVERVIEW</text>
+
+  <!-- headline (matches the site H1) -->
+  <text x="90" y="344" font-family="Georgia, 'Times New Roman', serif" font-size="72" font-weight="600" fill="#eef4fb">Reproductive microfluidics,</text>
+  <text x="90" y="428" font-family="Georgia, 'Times New Roman', serif" font-size="72" font-weight="600" font-style="italic" fill="#bfe9ff">built with legal discipline.</text>
+
+  <text x="90" y="486" font-family="Inter, 'Segoe UI', sans-serif" font-size="25" fill="#aab9cc">A development-stage reproductive microfluidics company.</text>
+
+  <!-- posture pills (no clinical / investment claims) -->
+  <g font-family="'JetBrains Mono', Consolas, monospace" font-size="20" font-weight="600">
+    <rect x="90" y="524" width="222" height="50" rx="25" fill="none" stroke="#66c8ff" stroke-opacity="0.4"/>
+    <text x="116" y="556" fill="#bfe9ff">Development-stage</text>
+    <rect x="328" y="524" width="196" height="50" rx="25" fill="none" stroke="#94e2b2" stroke-opacity="0.4"/>
+    <text x="354" y="556" fill="#94e2b2">Aevrium Select</text>
+    <rect x="540" y="524" width="200" height="50" rx="25" fill="none" stroke="#d8b36a" stroke-opacity="0.45"/>
+    <text x="566" y="556" fill="#f3d596">Patent-pending</text>
+  </g>
+
+  <!-- ribbons-and-nodes motif -->
+  <g transform="translate(905,205)" fill="none">
+    <path d="M0 0 H170" stroke="#66c8ff" stroke-width="3" stroke-opacity="0.8"/>
+    <path d="M0 50 H170" stroke="#66c8ff" stroke-width="3" stroke-opacity="0.5"/>
+    <path d="M0 100 H100" stroke="#ffffff" stroke-width="2" stroke-opacity="0.18"/>
+    <path d="M170 0 C210 0 210 50 240 50" stroke="#94e2b2" stroke-width="3"/>
+    <path d="M170 50 H240" stroke="#94e2b2" stroke-width="3"/>
+    <circle cx="240" cy="50" r="13" fill="#94e2b2" fill-opacity="0.15" stroke="#94e2b2" stroke-width="3"/>
+    <circle cx="240" cy="50" r="4.5" fill="#d8b36a"/>
+  </g>
+
+  <text x="1110" y="592" text-anchor="end" font-family="'JetBrains Mono', Consolas, monospace" font-size="18" letter-spacing="1" fill="#7f90a7" opacity="0.9">www.aevrium.com</text>
+</svg>
