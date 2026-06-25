@@ -1,4 +1,4 @@
-<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aevrium Biosystems — development-stage reproductive microfluidics">
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aevrium Biosciences — development-stage reproductive microfluidics">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#07111f"/>
@@ -47,7 +47,7 @@
       <ellipse cx="15.1" cy="20.4" rx="1.2" ry="0.8" fill="#ffffff" opacity="0.7"/>
     </g>
   </g>
-  <text x="196" y="118" font-family="Inter, 'Segoe UI', sans-serif" font-size="26" font-weight="800" letter-spacing="3" fill="#eef4fb">AEVRIUM BIOSYSTEMS</text>
+  <text x="196" y="118" font-family="Inter, 'Segoe UI', sans-serif" font-size="26" font-weight="800" letter-spacing="3" fill="#eef4fb">AEVRIUM BIOSCIENCES</text>
   <text x="196" y="150" font-family="'JetBrains Mono', Consolas, monospace" font-size="16" letter-spacing="2" fill="#7f90a7">A FAREBAN OPERATING COMPANY</text>
 
   <!-- eyebrow -->
